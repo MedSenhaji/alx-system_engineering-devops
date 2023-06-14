@@ -1,2 +1,17 @@
 #!/bin/bash
-printf "%o\n" $(( $((5#(echo $WATER | tr water 01234))) + $((5#(echo $STIR | tr stir. 01234))) )) | tr 01234567 bestchol
+
+# Convertir les valeurs de la base water à la base 10
+water_decimal=$(echo $WATER | tr '[:lower:]' '[:upper:]' | tr 'WATER' '01234')
+
+# Convertir les valeurs de la base stir à la base 10
+stir_decimal=$(echo $STIR | tr '[:lower:]' '[:upper:]' | tr 'STIR.' '01234')
+
+# Additionner les valeurs en base 10
+result_decimal=$((water_decimal + stir_decimal))
+
+# Convertir le résultat en base bestchol
+result_bestchol=$(echo "obase=bestchol; $result_decimal" | bc)
+
+# Afficher le résultat
+echo "Le résultat en base bestchol : $result_bestchol"
+
